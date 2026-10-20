@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#17191b">
+  <meta name="description" content="VijayClicks25 — photography, graphic design, photo albums and creative visuals for your special moments.">
+  <title>VijayClicks25 | Photography & Creative Design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #17191b;
+      --panel: #222528;
+      --yellow: #f5d547;
+      --white: #f2f2f0;
+      --muted: #a5a8ad;
+      --line: #383b3f;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 82px; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--white);
+      font-family: Inter, sans-serif;
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; width: 100%; object-fit: cover; }
+    .container { width: min(1100px, 90%); margin: auto; }
+    .accent { color: var(--yellow); }
+    .eyebrow {
+      color: var(--yellow); text-transform: uppercase;
+      letter-spacing: 2px; font-size: 11px; font-weight: 700;
+    }
+    h1, h2, h3, .brand { font-family: "Space Grotesk", sans-serif; }
+    h1 { font-size: clamp(42px, 8vw, 76px); line-height: 1.04; letter-spacing: -2.8px; margin: 18px 0; }
+    h2 { font-size: clamp(30px, 5vw, 45px); line-height: 1.15; margin: 8px 0 14px; }
+    p { color: var(--muted); }
+    .header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(23,25,27,.94); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand { font-size: 19px; font-weight: 700; letter-spacing: -.5px; }
+    .brand-mark { color: var(--yellow); }
+    .nav-links { display: flex; align-items: center; gap: 22px; font-size: 13px; }
+    .nav-links a:hover { color: var(--yellow); }
+    .menu-button {
+      display: none; color: var(--yellow); background: transparent;
+      border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px;
+    }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 12px 17px; border-radius: 8px; font-weight: 700;
+      font-size: 13px; transition: .2s ease; border: 1px solid var(--line);
+    }
+    .button-primary {
+      background: var(--yellow); color: #17191b; border-color: var(--yellow);
+      box-shadow: 0 0 0 rgba(245,213,71,0);
+    }
+    .button-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 24px rgba(245,213,71,.22);
+    }
+    .button-secondary:hover { border-color: var(--yellow); color: var(--yellow); }
+    .hero { padding: 72px 0 60px; }
+    .hero-grid { display: grid; grid-template-columns: 1fr .88fr; align-items: center; gap: 42px; }
+    .hero-copy p { max-width: 490px; }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+    .hero-photo { position: relative; }
+    .hero-photo img { height: 430px; border-radius: 14px; border: 1px solid #45484b; }
+    .photo-label {
+      position: absolute; left: 14px; right: 14px; bottom: 14px;
+      padding: 13px 15px; border-radius: 10px;
+      background: rgba(20,22,24,.86); backdrop-filter: blur(8px);
+      border: 1px solid #45484b; font-size: 12px;
+    }
+    section { padding: 68px 0; border-top: 1px solid rgba(255,255,255,.055); }
+    .section-head { margin-bottom: 28px; }
+    .section-head p { max-width: 570px; }
+    .services, .portfolio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .service {
+      padding: 22px; background: linear-gradient(145deg, #25282b, #1c1e20);
+      border: 1px solid var(--line); border-radius: 12px;
+      transition: transform .2s, border-color .2s;
+    }
+    .service:hover, .work:hover { transform: translateY(-4px); border-color: #8c7a35; }
+    .service-icon { color: var(--yellow); font-size: 24px; }
+    .service h3 { margin: 12px 0 5px; font-size: 19px; }
+    .service p { font-size: 13px; margin-bottom: 0; }
+    .work {
+      overflow: hidden; border: 1px solid var(--line); border-radius: 12px;
+      background: var(--panel); transition: .2s ease;
+    }
+    .work img { height: 220px; transition: transform .35s; }
+    .work:hover img { transform: scale(1.035); }
+    .work-info { padding: 15px; }
+    .work-info h3 { margin: 0; font-size: 17px; }
+    .work-info p { font-size: 12px; margin: 4px 0 0; }
+    .about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 32px; align-items: center; }
+    .about-card {
+      padding: 30px; border-radius: 12px; border: 1px solid var(--line);
+      background: radial-gradient(ellipse at top left, #34373a, #1b1d1f 72%);
+    }
+    .about-card .monogram { font: 700 70px "Space Grotesk", sans-serif; color: var(--yellow); }
+    .contact-panel {
+      padding: clamp(24px, 6vw, 48px); border-radius: 15px;
+      border: 1px solid #514a2d;
+      background: radial-gradient(ellipse at top right, #363322, #202224 60%);
+    }
+    .contact-panel p { max-width: 560px; }
+    footer { padding: 25px 0; border-top: 1px solid var(--line); }
+    .footer-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 12px; color: var(--muted); }
+    .footer-inner a:hover { color: var(--yellow); }
+    @media (max-width: 760px) {
+      .nav { min-height: 65px; }
+      .menu-button { display: block; }
+      .nav-links {
+        display: none; position: absolute; top: 64px; left: 0; right: 0;
+        padding: 20px 5%; background: #1b1d1f;
+        border-bottom: 1px solid var(--line);
+        flex-direction: column; align-items: stretch; gap: 16px;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links .button { width: 100%; }
+      .hero { padding-top: 48px; }
+      .hero-grid, .about-grid { grid-template-columns: 1fr; gap: 26px; }
+      .hero-photo img { height: 300px; }
+      section { padding: 52px 0; }
+      .services, .portfolio { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
+      .service { padding: 15px; }
+      .service h3 { font-size: 16px; }
+      .work img { height: 160px; }
+      .work-info { padding: 11px; }
+      .work-info h3 { font-size: 14px; }
+      h1 { letter-spacing: -1.8px; }
+    }
+    @media (max-width: 380px) {
+      .services, .portfolio { grid-template-columns: 1fr; }
+      .work img { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container nav">
+      <a class="brand" href="#home"><span class="brand-mark">VJ</span> VIJAYCLICKS25</a>
+      <button class="menu-button" id="menuButton" aria-expanded="false" aria-controls="navLinks">MENU ☰</button>
+      <nav class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#about">About</a>
+        <a class="button button-primary" href="#contact">Let's Talk ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home" style="border:0">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Photography · Design · Creativity</div>
+          <h1>Every Moment.<br><span class="accent">A Story.</span></h1>
+          <p>Capturing meaningful moments and creating visuals that make your ideas stand out. Thoughtful photography and creative design, made with care.</p>
+          <div class="actions">
+            <a class="button button-primary" href="#portfolio">Explore My Work ↗</a>
+            <a class="button button-secondary" href="#contact">Book a Session</a>
+          </div>
+          <p style="font-size:12px;margin-top:22px">Birthdays · Family Events · Graphic Design · Albums</p>
+        </div>
+        <div class="hero-photo">
+          <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1000&q=85" alt="Camera ready for a photography session">
+          <div class="photo-label"><span class="accent">VJ / 001</span> &nbsp; Creating stories, one frame at a time.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">What I Do</div>
+          <h2>Creative work.<br><span class="accent">Personal touch.</span></h2>
+          <p>From special celebrations to digital designs, explore the services available through VijayClicks25.</p>
+        </div>
+        <div class="services">
+          <article class="service"><div class="service-icon">◉</div><h3>Birthday Photography</h3><p>Portraits, celebration details and memorable moments.</p></article>
+          <article class="service"><div class="service-icon">⌂</div><h3>Family Functions</h3><p>Natural moments and meaningful family memories.</p></article>
+          <article class="service"><div class="service-icon">✳</div><h3>Wedding Events</h3><p>Event photography enquiries and creative album work.</p></article>
+          <article class="service"><div class="service-icon">▧</div><h3>Photo Album Design</h3><p>Thoughtfully arranged layouts for treasured photographs.</p></article>
+          <article class="service"><div class="service-icon">✎</div><h3>Poster Design</h3><p>Event posters, announcements and promotional graphics.</p></article>
+          <article class="service"><div class="service-icon">▶</div><h3>Thumbnail Design</h3><p>Clear, engaging visuals for videos and social media.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Selected Projects</div>
+          <h2>Work that speaks.<br><span class="accent">Stories that stay.</span></h2>
+          <p>Replace these sample images with your own best photographs and design projects.</p>
+        </div>
+        <div class="portfolio">
+          <article class="work">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=700&q=80" alt="Wedding photography sample">
+            <div class="work-info"><h3>Wedding Stories</h3><p>Photography / Events</p></div>
+          </article>
+          <article class="work">
+            <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=700&q=80" alt="Celebration table sample">
+            <div class="work-info"><h3>Birthday Moments</h3><p>Photography / Celebrations</p></div>
+          </article>
+          <article class="work">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=80" alt="Landscape photography sample">
+            <div class="work-info"><h3>Nature Frames</h3><p>Photography / Outdoor</p></div>
+          </article>
+          <article class="work">
+            <img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=700&q=80" alt="Minimal creative composition sample">
+            <div class="work-info"><h3>Creative Concepts</h3><p>Graphic Design</p></div>
+          </article>
+          <article class="work">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=80" alt="Digital creative workspace sample">
+            <div class="work-info"><h3>Digital Creatives</h3><p>Posters / Thumbnails</p></div>
+          </article>
+          <article class="work">
+            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=700&q=80" alt="Event photography sample">
+            <div class="work-info"><h3>Special Occasions</h3><p>Events / Albums</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container about-grid">
+        <div class="about-card">
+          <div class="monogram">VJ<span style="color:#f2f2f0">.</span></div>
+          <div class="eyebrow">VijayClicks25</div>
+          <p style="font-size:13px">Photography & Creative Design</p>
+        </div>
+        <div>
+          <div class="eyebrow">A Little About Me</div>
+          <h2>Made with creativity.<br><span class="accent">Built around your story.</span></h2>
+          <p>I'm building VijayClicks25 around photography and graphic design. My aim is to create thoughtful visuals and preserve the moments that matter to people.</p>
+          <p>Explore my work and get in touch to discuss your next project.</p>
+          <a class="button button-secondary" href="#contact">Get in Touch ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-panel">
+          <div class="eyebrow">Have a Project in Mind?</div>
+          <h2>Let's create something<br><span class="accent">worth remembering.</span></h2>
+          <p>Tell me about your event or design requirement. Message me to discuss your idea, availability and pricing.</p>
+          <div class="actions">
+            <!-- Replace the example WhatsApp number before publishing -->
+            <a class="button button-primary" href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener">Enquire on WhatsApp ↗</a>
+            <a class="button button-secondary" href="https://www.instagram.com/VijayClicks25/" target="_blank" rel="noopener">Instagram ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© <span id="year"></span> VijayClicks25. All rights reserved.</span>
+      <span>Photography <span class="accent">×</span> Creative Design</span>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.getElementById("menuButton");
+    const navLinks = document.getElementById("navLinks");
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+  </html>
+  
