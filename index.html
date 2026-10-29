@@ -1,292 +1,915 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#17191b">
-  <meta name="description" content="VijayClicks25 — photography, graphic design, photo albums and creative visuals for your special moments.">
-  <title>VijayClicks25 | Photography & Creative Design</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #17191b;
-      --panel: #222528;
-      --yellow: #f5d547;
-      --white: #f2f2f0;
-      --muted: #a5a8ad;
-      --line: #383b3f;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 82px; }
-    body { margin: 0; background: var(--bg); color: var(--white); font-family: Inter, sans-serif; line-height: 1.65; }
-    body.modal-open { overflow: hidden; }
-    a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; object-fit: cover; }
-    button, input, select, textarea { font: inherit; }
-    .container { width: min(1100px, 90%); margin: auto; }
-    .accent { color: var(--yellow); }
-    .eyebrow { color: var(--yellow); text-transform: uppercase; letter-spacing: 2px; font-size: 11px; font-weight: 700; }
-    h1, h2, h3, .brand { font-family: "Space Grotesk", sans-serif; }
-    h1 { font-size: clamp(42px, 8vw, 76px); line-height: 1.04; letter-spacing: -2.8px; margin: 18px 0; }
-    h2 { font-size: clamp(30px, 5vw, 45px); line-height: 1.15; margin: 8px 0 14px; }
-    p { color: var(--muted); }
-    .header { position: sticky; top: 0; z-index: 10; background: rgba(23,25,27,.94); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
-    .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-    .brand { display: inline-flex; align-items: center; gap: 11px; min-width: 0; font-size: 19px; font-weight: 700; letter-spacing: -.5px; }
-    .brand-logo { width: 44px; height: 44px; object-fit: contain; flex: 0 0 auto; }
-    .brand-name { white-space: nowrap; }
-    .nav-links { display: flex; align-items: center; gap: 22px; font-size: 13px; }
-    .nav-links a:hover, .footer-links a:hover { color: var(--yellow); }
-    .menu-button { display: none; color: var(--yellow); background: transparent; border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; }
-    .button { display: inline-flex; align-items: center; justify-content: center; padding: 12px 17px; border-radius: 8px; font-weight: 700; font-size: 13px; transition: .2s ease; border: 1px solid var(--line); cursor: pointer; }
-    .button-primary { background: var(--yellow); color: #17191b; border-color: var(--yellow); }
-    .button-primary:hover { transform: translateY(-2px); box-shadow: 0 0 24px rgba(245,213,71,.22); }
-    .button-secondary:hover { border-color: var(--yellow); color: var(--yellow); }
-    .hero { padding: 72px 0 60px; }
-    .hero-grid { display: grid; grid-template-columns: 1fr .88fr; align-items: center; gap: 42px; }
-    .hero-copy p { max-width: 490px; }
-    .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
-    .hero-photo { position: relative; }
-    .hero-photo img { width: 100%; height: 430px; border-radius: 14px; border: 1px solid #45484b; }
-    .photo-label { position: absolute; left: 14px; right: 14px; bottom: 14px; padding: 13px 15px; border-radius: 10px; background: rgba(20,22,24,.86); backdrop-filter: blur(8px); border: 1px solid #45484b; font-size: 12px; }
-    section { padding: 68px 0; border-top: 1px solid rgba(255,255,255,.055); }
-    .section-head { margin-bottom: 28px; }
-    .section-head p { max-width: 570px; }
-    .services, .portfolio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .service { padding: 22px; background: linear-gradient(145deg, #25282b, #1c1e20); border: 1px solid var(--line); border-radius: 12px; transition: transform .2s, border-color .2s; }
-    .service:hover, .work:hover { transform: translateY(-4px); border-color: #8c7a35; }
-    .service-icon { color: var(--yellow); font-size: 24px; }
-    .service h3 { margin: 12px 0 5px; font-size: 19px; }
-    .service p { font-size: 13px; margin-bottom: 0; }
-    .work { overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); transition: .2s ease; }
-    .work-button { display: block; width: 100%; padding: 0; border: 0; text-align: left; color: inherit; background: transparent; cursor: pointer; }
-    .work-button:focus-visible { outline: 2px solid var(--yellow); outline-offset: 3px; border-radius: 12px; }
-    .work img { width: 100%; height: 220px; transition: transform .35s; }
-    .work:hover img { transform: scale(1.035); }
-    .work-info { padding: 15px; }
-    .work-info h3 { margin: 0; font-size: 17px; }
-    .work-info p { font-size: 12px; margin: 4px 0 0; }
-    .portfolio-actions { margin-top: 24px; }
-    .about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 32px; align-items: center; }
-    .about-card { padding: 30px; border-radius: 12px; border: 1px solid var(--line); background: radial-gradient(ellipse at top left, #34373a, #1b1d1f 72%); }
-    .about-logo { width: min(100%, 260px); height: 150px; object-fit: contain; object-position: left center; margin-bottom: 18px; }
-    .contact-panel { padding: clamp(24px, 6vw, 48px); border-radius: 15px; border: 1px solid #514a2d; background: radial-gradient(ellipse at top right, #363322, #202224 60%); }
-    .contact-panel p { max-width: 560px; }
-    footer { padding: 28px 0; border-top: 1px solid var(--line); }
-    .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px; font-size: 12px; color: var(--muted); }
-    .footer-brand { display: flex; align-items: center; gap: 12px; }
-    .footer-logo { width: 58px; height: 58px; object-fit: contain; flex: 0 0 auto; }
-    .footer-tagline { display: block; }
-    .footer-links { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-    .footer-links a { color: var(--white); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#17191b">
+<meta name="description" content="VijayClicks25 Photography and Creative Design">
+<title>VijayClicks25 | Photography & Creative Design</title>
 
-    /* Service enquiry dialog */
-    .modal-backdrop { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; padding: 18px; background: rgba(0,0,0,.76); overflow-y: auto; }
-    .modal-backdrop.open { display: flex; }
-    .enquiry-modal { position: relative; width: min(620px, 100%); max-height: 92vh; overflow-y: auto; padding: clamp(20px, 5vw, 32px); border: 1px solid #514a2d; border-radius: 16px; background: #202224; box-shadow: 0 24px 80px rgba(0,0,0,.45); }
-    .modal-close { position: absolute; top: 12px; right: 12px; width: 38px; height: 38px; border-radius: 9px; color: var(--white); background: #2a2d30; border: 1px solid var(--line); font-size: 22px; cursor: pointer; }
-    .modal-image { width: 100%; height: 190px; object-fit: cover; border-radius: 10px; margin: 16px 0; }
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
-    .field { display: flex; flex-direction: column; gap: 6px; }
-    .field.full { grid-column: 1 / -1; }
-    .field label { color: var(--white); font-size: 12px; font-weight: 600; }
-    .field input, .field select, .field textarea { width: 100%; padding: 12px; color: var(--white); background: #17191b; border: 1px solid var(--line); border-radius: 8px; outline: none; }
-    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--yellow); }
-    .field textarea { min-height: 94px; resize: vertical; }
-    .form-note { font-size: 12px; margin-bottom: 0; }
-    .form-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
-    @media (max-width: 760px) {
-      .nav { min-height: 65px; }
-      .brand { gap: 8px; font-size: 15px; }
-      .brand-logo { width: 36px; height: 36px; }
-      .menu-button { display: block; flex: 0 0 auto; }
-      .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; padding: 20px 5%; background: #1b1d1f; border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; gap: 16px; }
-      .nav-links.open { display: flex; }
-      .nav-links .button { width: 100%; }
-      .hero { padding-top: 48px; }
-      .hero-grid, .about-grid { grid-template-columns: 1fr; gap: 26px; }
-      .hero-photo img { height: 300px; }
-      section { padding: 52px 0; }
-      .services, .portfolio { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
-      .service { padding: 15px; }
-      .service h3 { font-size: 16px; }
-      .work img { height: 160px; }
-      .work-info { padding: 11px; }
-      .work-info h3 { font-size: 14px; }
-      h1 { letter-spacing: -1.8px; }
-      .footer-inner { align-items: flex-start; flex-direction: column; }
-    }
-    @media (max-width: 440px) {
-      .brand { font-size: 12px; }
-      .brand-logo { width: 32px; height: 32px; }
-      .services, .portfolio { grid-template-columns: 1fr; }
-      .work img { height: 220px; }
-      .form-grid { grid-template-columns: 1fr; }
-      .field.full { grid-column: auto; }
-    }
-  </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#17191b;
+  --panel:#222528;
+  --yellow:#f5d547;
+  --white:#f2f2f0;
+  --muted:#a5a8ad;
+  --line:#383b3f;
+}
+
+* { box-sizing:border-box; }
+
+html {
+  scroll-behavior:smooth;
+  scroll-padding-top:82px;
+}
+
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--white);
+  font-family:Inter,sans-serif;
+  line-height:1.65;
+}
+
+body.modal-open { overflow:hidden; }
+
+a { color:inherit; text-decoration:none; }
+
+img {
+  display:block;
+  max-width:100%;
+  object-fit:cover;
+}
+
+button,input,select,textarea { font:inherit; }
+
+.container { width:min(1100px,90%); margin:auto; }
+
+.accent { color:var(--yellow); }
+
+.eyebrow {
+  color:var(--yellow);
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:11px;
+  font-weight:700;
+}
+
+h1,h2,h3,.brand {
+  font-family:"Space Grotesk",sans-serif;
+}
+
+h1 {
+  font-size:clamp(42px,8vw,76px);
+  line-height:1.04;
+  letter-spacing:-2px;
+  margin:18px 0;
+}
+
+h2 {
+  font-size:clamp(30px,5vw,45px);
+  line-height:1.15;
+  margin:8px 0 14px;
+}
+
+p { color:var(--muted); }
+
+.header {
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:rgba(23,25,27,.96);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav {
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+.brand {
+  display:flex;
+  align-items:center;
+  gap:11px;
+  font-size:19px;
+  font-weight:700;
+}
+
+.brand-logo {
+  width:44px;
+  height:44px;
+  object-fit:contain;
+  flex-shrink:0;
+}
+
+.brand-name { white-space:nowrap; }
+
+.nav-links {
+  display:flex;
+  align-items:center;
+  gap:22px;
+  font-size:13px;
+}
+
+.nav-links a:hover,
+.footer-links a:hover { color:var(--yellow); }
+
+.menu-button {
+  display:none;
+  color:var(--yellow);
+  background:transparent;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:8px 12px;
+  cursor:pointer;
+}
+
+.button {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px 17px;
+  border-radius:8px;
+  font-weight:700;
+  font-size:13px;
+  transition:.2s;
+  border:1px solid var(--line);
+  cursor:pointer;
+}
+
+.button-primary {
+  background:var(--yellow);
+  color:#17191b;
+  border-color:var(--yellow);
+}
+
+.button-primary:hover {
+  transform:translateY(-2px);
+  box-shadow:0 0 24px rgba(245,213,71,.22);
+}
+
+.button-secondary:hover {
+  border-color:var(--yellow);
+  color:var(--yellow);
+}
+
+.hero { padding:72px 0 60px; }
+
+.hero-grid {
+  display:grid;
+  grid-template-columns:1fr .88fr;
+  align-items:center;
+  gap:42px;
+}
+
+.hero-copy p { max-width:490px; }
+
+.actions {
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:26px;
+}
+
+.hero-photo { position:relative; }
+
+.hero-photo img {
+  width:100%;
+  height:430px;
+  border-radius:14px;
+  border:1px solid #45484b;
+}
+
+.photo-label {
+  position:absolute;
+  left:14px;
+  right:14px;
+  bottom:14px;
+  padding:13px 15px;
+  border-radius:10px;
+  background:rgba(20,22,24,.88);
+  border:1px solid #45484b;
+  font-size:12px;
+}
+
+section {
+  padding:68px 0;
+  border-top:1px solid rgba(255,255,255,.055);
+}
+
+.section-head { margin-bottom:28px; }
+
+.section-head p { max-width:570px; }
+
+.services,.portfolio {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px;
+}
+
+.service {
+  padding:22px;
+  background:linear-gradient(145deg,#25282b,#1c1e20);
+  border:1px solid var(--line);
+  border-radius:12px;
+  transition:.2s;
+}
+
+.service:hover,.work:hover {
+  transform:translateY(-4px);
+  border-color:#8c7a35;
+}
+
+.service-icon {
+  color:var(--yellow);
+  font-size:24px;
+}
+
+.service h3 {
+  margin:12px 0 5px;
+  font-size:19px;
+}
+
+.service p {
+  font-size:13px;
+  margin-bottom:0;
+}
+
+.work {
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--panel);
+  transition:.2s;
+}
+
+.work-button {
+  display:block;
+  width:100%;
+  padding:0;
+  border:0;
+  text-align:left;
+  color:inherit;
+  background:transparent;
+  cursor:pointer;
+}
+
+.work-button:focus-visible {
+  outline:2px solid var(--yellow);
+  outline-offset:3px;
+}
+
+.work img {
+  width:100%;
+  height:220px;
+  transition:transform .35s;
+}
+
+.work:hover img { transform:scale(1.035); }
+
+.work-info { padding:15px; }
+
+.work-info h3 {
+  margin:0;
+  font-size:17px;
+}
+
+.work-info p {
+  font-size:12px;
+  margin:4px 0 0;
+}
+
+.portfolio-actions { margin-top:24px; }
+
+.about-grid {
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:32px;
+  align-items:center;
+}
+
+.about-card {
+  padding:30px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:radial-gradient(ellipse at top left,#34373a,#1b1d1f 72%);
+}
+
+.about-logo {
+  width:min(100%,260px);
+  height:150px;
+  object-fit:contain;
+  object-position:left center;
+  margin-bottom:18px;
+}
+
+.contact-panel {
+  padding:clamp(24px,6vw,48px);
+  border-radius:15px;
+  border:1px solid #514a2d;
+  background:radial-gradient(ellipse at top right,#363322,#202224 60%);
+}
+
+.contact-panel p { max-width:560px; }
+
+footer {
+  padding:28px 0;
+  border-top:1px solid var(--line);
+}
+
+.footer-inner {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  font-size:12px;
+  color:var(--muted);
+}
+
+.footer-brand {
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.footer-logo {
+  width:58px;
+  height:58px;
+  object-fit:contain;
+  flex-shrink:0;
+}
+
+.footer-tagline { display:block; }
+
+.footer-links {
+  display:flex;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+}
+
+.footer-links a { color:var(--white); }
+
+/* Enquiry form */
+
+.modal-backdrop {
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:rgba(0,0,0,.76);
+  overflow-y:auto;
+}
+
+.modal-backdrop.open { display:flex; }
+
+.enquiry-modal {
+  position:relative;
+  width:min(620px,100%);
+  max-height:92vh;
+  overflow-y:auto;
+  padding:clamp(20px,5vw,32px);
+  border:1px solid #514a2d;
+  border-radius:16px;
+  background:#202224;
+}
+
+.modal-close {
+  position:absolute;
+  top:12px;
+  right:12px;
+  width:38px;
+  height:38px;
+  border-radius:9px;
+  color:var(--white);
+  background:#2a2d30;
+  border:1px solid var(--line);
+  font-size:22px;
+  cursor:pointer;
+}
+
+.modal-image {
+  width:100%;
+  height:190px;
+  object-fit:contain;
+  background:#17191b;
+  border-radius:10px;
+  margin:16px 0;
+}
+
+.form-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin-top:18px;
+}
+
+.field {
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.field.full { grid-column:1/-1; }
+
+.field label {
+  color:var(--white);
+  font-size:12px;
+  font-weight:600;
+}
+
+.field input,.field select,.field textarea {
+  width:100%;
+  padding:12px;
+  color:var(--white);
+  background:#17191b;
+  border:1px solid var(--line);
+  border-radius:8px;
+  outline:none;
+}
+
+.field input:focus,.field select:focus,.field textarea:focus {
+  border-color:var(--yellow);
+}
+
+.field textarea {
+  min-height:94px;
+  resize:vertical;
+}
+
+.form-note { font-size:12px; }
+
+.form-actions {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
+@media(max-width:760px) {
+  .nav { min-height:65px; }
+
+  .brand { gap:8px; font-size:15px; }
+
+  .brand-logo { width:36px; height:36px; }
+
+  .menu-button { display:block; }
+
+  .nav-links {
+    display:none;
+    position:absolute;
+    top:64px;
+    left:0;
+    right:0;
+    padding:20px 5%;
+    background:#1b1d1f;
+    border-bottom:1px solid var(--line);
+    flex-direction:column;
+    align-items:stretch;
+    gap:16px;
+  }
+
+  .nav-links.open { display:flex; }
+
+  .nav-links .button { width:100%; }
+
+  .hero { padding-top:48px; }
+
+  .hero-grid,.about-grid {
+    grid-template-columns:1fr;
+    gap:26px;
+  }
+
+  .hero-photo img { height:300px; }
+
+  section { padding:52px 0; }
+
+  .services,.portfolio {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:11px;
+  }
+
+  .service { padding:15px; }
+
+  .service h3 { font-size:16px; }
+
+  .work img { height:160px; }
+
+  .work-info { padding:11px; }
+
+  .work-info h3 { font-size:14px; }
+
+  .footer-inner {
+    align-items:flex-start;
+    flex-direction:column;
+  }
+}
+
+@media(max-width:440px) {
+  .brand { font-size:12px; }
+
+  .brand-logo { width:32px; height:32px; }
+
+  .services,.portfolio { grid-template-columns:1fr; }
+
+  .work img { height:220px; }
+
+  .form-grid { grid-template-columns:1fr; }
+
+  .field.full { grid-column:auto; }
+}
+</style>
 </head>
+
 <body>
-  <header class="header">
-    <div class="container nav">
-      <a class="brand" href="#home" aria-label="VijayClicks25 home">
-        <img class="brand-logo" src="vijayclicks-logo.png" alt="VijayClicks25 logo">
-        <span class="brand-name">VIJAYCLICKS25</span>
+
+<header class="header">
+  <div class="container nav">
+
+    <a class="brand" href="#home" aria-label="VijayClicks25 home">
+      <img class="brand-logo" src="vijayclicks-logo.png" alt="VijayClicks25 logo">
+      <span class="brand-name">VIJAYCLICKS25</span>
+    </a>
+
+    <button class="menu-button" id="menuButton"
+      aria-expanded="false" aria-controls="navLinks">
+      MENU ☰
+    </button>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#about">About</a>
+      <a class="button button-primary" href="#contact">Let's Talk ↗</a>
+    </nav>
+
+  </div>
+</header>
+
+<main>
+
+<!-- HOME -->
+
+<section class="hero" id="home" style="border:0">
+  <div class="container hero-grid">
+
+    <div class="hero-copy">
+      <div class="eyebrow">Photography · Design · Creativity</div>
+
+      <h1>Every Moment.<br><span class="accent">A Story.</span></h1>
+
+      <p>
+        Capturing meaningful moments and creating visuals that make your
+        ideas stand out. Thoughtful photography and creative design,
+        made with care.
+      </p>
+
+      <div class="actions">
+        <a class="button button-primary" href="#portfolio">Explore My Work ↗</a>
+        <a class="button button-secondary" href="#contact">Book a Session</a>
+      </div>
+
+      <p style="font-size:12px;margin-top:22px">
+        Birthdays · Family Events · Graphic Design · Albums
+      </p>
+    </div>
+
+    <div class="hero-photo">
+      <img
+        src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1000&q=85"
+        alt="Camera ready for a photography session">
+
+      <div class="photo-label">
+        <span class="accent">VJ / 001</span>
+        &nbsp; Creating stories, one frame at a time.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVICES -->
+
+<section id="services">
+  <div class="container">
+
+    <div class="section-head">
+      <div class="eyebrow">What I Do</div>
+      <h2>Creative work.<br><span class="accent">Personal touch.</span></h2>
+      <p>
+        From special celebrations to digital designs, explore the
+        services available through VijayClicks25.
+      </p>
+    </div>
+
+    <div class="services">
+
+      <article class="service">
+        <div class="service-icon">◉</div>
+        <h3>Birthday Photography</h3>
+        <p>Portraits, celebration details and memorable moments.</p>
+      </article>
+
+      <article class="service">
+        <div class="service-icon">⌂</div>
+        <h3>Family Functions</h3>
+        <p>Natural moments and meaningful family memories.</p>
+      </article>
+
+      <article class="service">
+        <div class="service-icon">✳</div>
+        <h3>Wedding Events</h3>
+        <p>Event photography enquiries and creative album work.</p>
+      </article>
+
+      <article class="service">
+        <div class="service-icon">▧</div>
+        <h3>Photo Album Design</h3>
+        <p>Thoughtfully arranged layouts for treasured photographs.</p>
+      </article>
+
+      <article class="service">
+        <div class="service-icon">✎</div>
+        <h3>Poster Design</h3>
+        <p>Event posters, announcements and promotional graphics.</p>
+      </article>
+
+      <article class="service">
+        <div class="service-icon">▶</div>
+        <h3>Thumbnail Design</h3>
+        <p>Clear, engaging visuals for videos and social media.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+
+<section id="portfolio">
+  <div class="container">
+
+    <div class="section-head">
+      <div class="eyebrow">Selected Projects</div>
+      <h2>Work that speaks.<br><span class="accent">Stories that stay.</span></h2>
+      <p>
+        Select a project to view details and send an enquiry.
+        For more of my work, visit Instagram.
+      </p>
+    </div>
+
+    <div class="portfolio">
+
+      <!-- WEDDING -->
+
+      <article class="work">
+        <button class="work-button" type="button"
+          data-service="Wedding Stories"
+          data-description="Wedding photography and memorable moments from wedding celebrations."
+          data-image="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=85">
+
+          <img
+            src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=700&q=80"
+            alt="Wedding photography sample">
+
+          <div class="work-info">
+            <h3>Wedding Stories</h3>
+            <p>Photography · Weddings</p>
+          </div>
+        </button>
+      </article>
+
+      <!-- BABY PHOTO: YOUR IMAGE -->
+
+      <article class="work">
+        <button class="work-button" type="button"
+          data-service="Little Moments — Baby Photography"
+          data-description="Baby portraits and precious early-life moments. Share the type of shoot you have in mind."
+          data-image="Baby%20photo.png">
+
+          <img src="Baby%20photo.png" alt="Baby photography portfolio">
+
+          <div class="work-info">
+            <h3>Little Moments</h3>
+            <p>Baby Photography · Portraits</p>
+          </div>
+        </button>
+      </article>
+
+      <!-- OUTDOOR PORTRAITS -->
+
+      <article class="work">
+        <button class="work-button" type="button"
+          data-service="Outdoor Portraits"
+          data-description="Portrait photography outdoors, using natural light and the surrounding environment."
+          data-image="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=85">
+
+          <img
+            src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=700&q=80"
+            alt="Outdoor portrait photography sample">
+
+          <div class="work-info">
+            <h3>Outdoor Portraits</h3>
+            <p>Portraits · Outdoor Shoots</p>
+          </div>
+        </button>
+      </article>
+
+      <!-- GRAPHIC DESIGN: YOUR IMAGE -->
+
+      <article class="work">
+        <button class="work-button" type="button"
+          data-service="Graphic Design"
+          data-description="Promotional posters, thumbnails, and social media designs. Describe the design you need."
+          data-image="Graphic.png">
+
+          <img src="Graphic.png" alt="Graphic design portfolio">
+
+          <div class="work-info">
+            <h3>Graphic Design</h3>
+            <p>Posters · Thumbnails · Social Media</p>
+          </div>
+        </button>
+      </article>
+
+      <!-- EVENT PHOTOGRAPHY -->
+
+      <article class="work">
+        <button class="work-button" type="button"
+          data-service="Event Photography"
+          data-description="Photography for birthdays, family celebrations, and other special events."
+          data-image="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=900&q=85">
+
+          <img
+            src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=700&q=80"
+            alt="Birthday celebration and event photography sample">
+
+          <div class="work-info">
+            <h3>Event Photography</h3>
+            <p>Birthdays · Celebrations · Events</p>
+          </div>
+        </button>
+      </article>
+
+      <!-- ALBUM DESIGN -->
+
+      <article class="work">
+        <button class="work-button" type="button"
+          data-service="Album Design"
+          data-description="Custom photo album layouts and photo books for weddings, birthdays, and family events."
+          data-image="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=900&q=85">
+
+          <img
+            src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=700&q=80"
+            alt="Photo book and album design sample">
+
+          <div class="work-info">
+            <h3>Album Design</h3>
+            <p>Wedding Albums · Photo Books · Layouts</p>
+          </div>
+        </button>
+      </article>
+
+    </div>
+
+    <div class="actions portfolio-actions">
+      <a class="button button-primary"
+        href="https://www.instagram.com/VijayClicks25/"
+        target="_blank" rel="noopener noreferrer">
+        View Full Portfolio on Instagram ↗
       </a>
-      <button class="menu-button" id="menuButton" aria-expanded="false" aria-controls="navLinks">MENU ☰</button>
-      <nav class="nav-links" id="navLinks">
-        <a href="#home">Home</a>
-        <a href="#services">Services</a>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#about">About</a>
-        <a class="button button-primary" href="#contact">Let's Talk ↗</a>
-      </nav>
     </div>
-  </header>
 
-  <main>
-    <section class="hero" id="home" style="border:0">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <div class="eyebrow">Photography · Design · Creativity</div>
-          <h1>Every Moment.<br><span class="accent">A Story.</span></h1>
-          <p>Capturing meaningful moments and creating visuals that make your ideas stand out. Thoughtful photography and creative design, made with care.</p>
-          <div class="actions">
-            <a class="button button-primary" href="#portfolio">Explore My Work ↗</a>
-            <a class="button button-secondary" href="#contact">Book a Session</a>
-          </div>
-          <p style="font-size:12px;margin-top:22px">Birthdays · Family Events · Graphic Design · Albums</p>
-        </div>
-        <div class="hero-photo">
-          <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1000&q=85" alt="Camera ready for a photography session">
-          <div class="photo-label"><span class="accent">VJ / 001</span> &nbsp; Creating stories, one frame at a time.</div>
-        </div>
-      </div>
-    </section>
+  </div>
+</section>
 
-    <section id="services">
-      <div class="container">
-        <div class="section-head">
-          <div class="eyebrow">What I Do</div>
-          <h2>Creative work.<br><span class="accent">Personal touch.</span></h2>
-          <p>From special celebrations to digital designs, explore the services available through VijayClicks25.</p>
-        </div>
-        <div class="services">
-          <article class="service"><div class="service-icon">◉</div><h3>Birthday Photography</h3><p>Portraits, celebration details and memorable moments.</p></article>
-          <article class="service"><div class="service-icon">⌂</div><h3>Family Functions</h3><p>Natural moments and meaningful family memories.</p></article>
-          <article class="service"><div class="service-icon">✳</div><h3>Wedding Events</h3><p>Event photography enquiries and creative album work.</p></article>
-          <article class="service"><div class="service-icon">▧</div><h3>Photo Album Design</h3><p>Thoughtfully arranged layouts for treasured photographs.</p></article>
-          <article class="service"><div class="service-icon">✎</div><h3>Poster Design</h3><p>Event posters, announcements and promotional graphics.</p></article>
-          <article class="service"><div class="service-icon">▶</div><h3>Thumbnail Design</h3><p>Clear, engaging visuals for videos and social media.</p></article>
-        </div>
-      </div>
-    </section>
+<!-- ABOUT -->
 
-    <section id="portfolio">
-      <div class="container">
-        <div class="section-head">
-          <div class="eyebrow">Selected Projects</div>
-          <h2>Work that speaks.<br><span class="accent">Stories that stay.</span></h2>
-          <p>Choose a project category to view details and send an enquiry. For the full collection of my work, visit Instagram.</p>
-        </div>
-        <div class="portfolio">
-          <article class="work">
-            <button class="work-button" type="button" data-service="Wedding Stories" data-description="Wedding photography and memorable moments from wedding celebrations." data-image="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=85">
-              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=700&q=80" alt="Wedding photography sample">
-              <div class="work-info"><h3>Wedding Stories</h3><p>Photography · Weddings</p></div>
-            </button>
-          </article>
-          <article class="work">
-            <button class="work-button" type="button" data-service="Little Moments — Baby Photography" data-description="Baby portraits and precious early-life moments. Share the type of shoot you have in mind." data-image="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=900&q=85">
-              <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=700&q=80" alt="Soft, gentle portrait photography sample">
-              <div class="work-info"><h3>Little Moments</h3><p>Baby Photography · Portraits</p></div>
-            </button>
-          </article>
-          <article class="work">
-            <button class="work-button" type="button" data-service="Outdoor Portraits" data-description="Portrait photography outdoors, using natural light and the surrounding environment." data-image="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=85">
-              <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=700&q=80" alt="Single-person portrait photography sample">
-              <div class="work-info"><h3>Outdoor Portraits</h3><p>Portraits · Outdoor Shoots</p></div>
-            </button>
-          </article>
-          <article class="work">
-            <button class="work-button" type="button" data-service="Graphic Design" data-description="Promotional posters, thumbnails, and social media designs. Describe the design you need." data-image="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=900&q=85">
-              <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=700&q=80" alt="Graphic design and creative workspace sample">
-              <div class="work-info"><h3>Graphic Design</h3><p>Posters · Thumbnails · Social Media</p></div>
-            </button>
-          </article>
-          <article class="work">
-            <button class="work-button" type="button" data-service="Event Photography" data-description="Photography for birthdays, family celebrations, and other special events." data-image="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=900&q=85">
-              <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=700&q=80" alt="Birthday celebration and event photography sample">
-              <div class="work-info"><h3>Event Photography</h3><p>Birthdays · Celebrations · Events</p></div>
-            </button>
-          </article>
-          <article class="work">
-            <button class="work-button" type="button" data-service="Album Design" data-description="Custom photo album layouts and photo books for weddings, birthdays, and family events." data-image="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=900&q=85">
-              <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=700&q=80" alt="Printed photo book and album design sample">
-              <div class="work-info"><h3>Album Design</h3><p>Wedding Albums · Photo Books · Layouts</p></div>
-            </button>
-          </article>
-        </div>
-        <div class="actions portfolio-actions">
-          <a class="button button-primary" href="https://www.instagram.com/VijayClicks25/" target="_blank" rel="noopener noreferrer">View Full Portfolio on Instagram ↗</a>
-        </div>
-      </div>
-    </section>
+<section id="about">
+  <div class="container about-grid">
 
-    <section id="about">
-      <div class="container about-grid">
-        <div class="about-card">
-          <img class="about-logo" src="vijayclicks-logo.png" alt="VijayClicks25 logo">
-          <div class="eyebrow">VijayClicks25</div>
-          <p style="font-size:13px">Photography & Creative Design</p>
-        </div>
-        <div>
-          <div class="eyebrow">A Little About Me</div>
-          <h2>Made with creativity.<br><span class="accent">Built around your story.</span></h2>
-          <p>I'm building VijayClicks25 around photography and graphic design. My aim is to create thoughtful visuals and preserve the moments that matter to people.</p>
-          <p>Explore my work and get in touch to discuss your next project.</p>
-          <a class="button button-secondary" href="#contact">Get in Touch ↗</a>
-        </div>
-      </div>
-    </section>
+    <div class="about-card">
+      <img class="about-logo"
+        src="vijayclicks-logo.png"
+        alt="VijayClicks25 logo">
 
-    <section id="contact">
-      <div class="container">
-        <div class="contact-panel">
-          <div class="eyebrow">Have a Project in Mind?</div>
-          <h2>Let's create something<br><span class="accent">worth remembering.</span></h2>
-          <p>Tell me about your event or design requirement. Message me to discuss your idea, availability and pricing.</p>
-          <div class="actions">
-            <a class="button button-primary" href="https://wa.me/919505980279" target="_blank" rel="noopener noreferrer">Enquire on WhatsApp ↗</a>
-            <a class="button button-secondary" href="https://www.instagram.com/VijayClicks25/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <img class="footer-logo" src="vijayclicks-logo.png" alt="VijayClicks25 logo">
-        <div>
-          <strong style="color:var(--white)">VijayClicks25</strong>
-          <span class="footer-tagline">Photography × Creative Design</span>
-        </div>
-      </div>
-      <div class="footer-links">
-        <a href="https://www.instagram.com/VijayClicks25/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
-        <a href="https://wa.me/919505980279" target="_blank" rel="noopener noreferrer">WhatsApp ↗</a>
-      </div>
-      <span>© <span id="year"></span> VijayClicks25. All rights reserved.</span>
+      <div class="eyebrow">VijayClicks25</div>
+      <p style="font-size:13px">Photography & Creative Design</p>
     </div>
-  </footer>
 
-  <!-- Clicking a portfolio card opens this enquiry form. Submitting opens WhatsApp with the details pre-filled. -->
-  <div class="modal-backdrop" id="enquiryBackdrop" aria-hidden="true">
-    <section class="enquiry-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDescription">
-      <button class="modal-close" id="closeModal" type="button" aria-label="Close enquiry form">×</button>
-      <div class="eyebrow">Project Enquiry</div>
-      <h2 id="modalTitle">T
+    <div>
+      <div class="eyebrow">A Little About Me</div>
+
+      <h2>Made with creativity.<br>
+        <span class="accent">Built around your story.</span>
+      </h2>
+
+      <p>
+        I'm building VijayClicks25 around photography and graphic design.
+        My aim is to create thoughtful visuals and preserve the moments
+        that matter to people.
+      </p>
+
+      <p>Explore my work and get in touch to discuss your next project.</p>
+
+      <a class="button button-secondary" href="#contact">Get in Touch ↗</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+  <div class="container">
+
+    <div class="contact-panel">
+      <div class="eyebrow">Have a Project in Mind?</div>
+
+      <h2>Let's create something<br>
+        <span class="accent">worth remembering.</span>
+      </h2>
+
+      <p>
+        Tell me about your event or design requirement.
+        Message me to discuss your idea, availability and pricing.
+      </p>
+
+      <div class="actions">
+        <a class="button button-primary"
+          href="https://wa.me/919505980279"
+          target="_blank" rel="noopener noreferrer">
+          Enquire on WhatsApp ↗
+        </a>
+
+        <a class="button button-secondary"
+          href="https://www.instagram.com/VijayClicks25/"
+          target="_blank" rel="noopener noreferrer">
+          Instagram ↗
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="container footer-inner">
+
+    <div class="footer-brand">
+      <img class="footer-logo"
+        src="vijayclicks-logo.png"
+        alt="VijayClicks25 logo">
+
+      <div>
+        <strong style="color:var(--white)">VijayClicks25</strong>
+        <span class="footer-tagline">Photography × Creative Design</span>
+      </div>
+    </div>
+
+    <div class="footer-links">
+      <a href="https://www.instagram.com/VijayClicks25/"
+        target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+
+      <a href="https://wa.me/919505980279"
+        target="_blank" rel="noopener noreferrer">WhatsApp ↗</a>
+    </div>
+
+    <span>© <span id="year"></span> VijayClicks25. All rights reserved.</span>
+
+  </div>
+</footer>
+
+<!-- PORTFOLIO ENQUIRY FORM -->
+
+<div class="modal-backdrop" id="enquiryBackdrop" aria-hidden="true">
+
+  <section class="enquiry-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle"
+    aria-describedby="modalDescription">
+
+    <button class="modal-close" id="closeModal"
+      type="button" aria-label="Close enquiry form">×</button>
+
+    <div class="eyebrow">Project Enquiry</div>
+    <h2 id="modalTitle">Let's discuss yo
